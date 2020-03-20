@@ -1,16 +1,21 @@
 const express = require('express');
+const thoughtsService = require('./thoughtsService');
 
 const thoughtsRouter = express.Router();
 const bodyParser = express.json();
 
 thoughtsRouter
   .get('/', (req, res) => {
-    // should allow a ?user=1 query to get user specific thoughts (check for identity)
-    res.send('thoughts endpoint');
+    const db = req.app.get('db');
+
+    return thoughtsService.getAllThoughts(db)
+      .then((thoughts) => {
+        res.json(thoughts);
+      });
   })
   .post('/', bodyParser, (req, res) => {
     // eslint-disable-next-line no-unused-vars
-    const { id, user, content } = req.body;
+    const { id, userId, content } = req.body;
     req.app.get('websocket')
       .clients
       .forEach((client) => {

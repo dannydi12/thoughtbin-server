@@ -1,6 +1,8 @@
 module.exports = {
   getAllThoughts(db) {
-    return db.select('*').from('thoughts');
+    return db
+      .select('*')
+      .from('thoughts');
   },
   getThoughtById(db, id) {
     return db
@@ -28,6 +30,8 @@ module.exports = {
       .returning('*');
   },
   deleteThought(db, id) {
-    return db('thoughts').where({ id }).del();
+    return db('thoughts')
+      .where({ id })
+      .del();
   },
 };

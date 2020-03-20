@@ -22,7 +22,8 @@ thoughtsRouter.route('/')
       content,
     };
 
-    return thoughtsService.createThought(db, thoughtObject)
+    return thoughtsService
+      .createThought(db, thoughtObject)
       .then((thought) => {
         req.app.get('websocket')
           .clients
@@ -38,7 +39,8 @@ thoughtsRouter.route('/:id')
     const { id } = req.params;
     const db = req.app.get('db');
 
-    return thoughtsService.getThoughtById(db, id)
+    return thoughtsService
+      .getThoughtById(db, id)
       .then((thought) => {
         res.json(thought);
       });
@@ -48,14 +50,16 @@ thoughtsRouter.route('/:id')
     const { content } = req.body;
     const db = req.app.get('db');
 
-    return thoughtsService.updateThought(db, id, content)
+    return thoughtsService
+      .updateThought(db, id, content)
       .then((updatedThought) => res.status(200).json(updatedThought));
   })
   .delete((req, res) => {
     const { id } = req.params;
     const db = req.app.get('db');
 
-    return thoughtsService.deleteThought(db, id)
+    return thoughtsService
+      .deleteThought(db, id)
       .then(() => res.status(204).end());
   });
 

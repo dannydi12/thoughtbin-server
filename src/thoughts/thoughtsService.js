@@ -2,6 +2,13 @@ module.exports = {
   getAllThoughts(db) {
     return db.select('*').from('thoughts');
   },
+  getThoughtById(db, id) {
+    return db
+      .select('*')
+      .from('thoughts')
+      .where({ id })
+      .first();
+  },
   getUserThoughts(db, userId) {
     return db // userId will be derived from a function that reads auth header for identity
       .select('*')

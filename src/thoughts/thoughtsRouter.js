@@ -34,6 +34,15 @@ thoughtsRouter.route('/')
   });
 
 thoughtsRouter.route('/:id')
+  .get((req, res) => {
+    const { id } = req.params;
+    const db = req.app.get('db');
+
+    return thoughtsService.getThoughtById(db, id)
+      .then((thought) => {
+        res.json(thought);
+      });
+  })
   .patch(bodyParser, (req, res) => {
     const { id } = req.params;
     const { content } = req.body;

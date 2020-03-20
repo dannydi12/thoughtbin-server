@@ -8,4 +8,10 @@ module.exports = {
       .from('thoughts')
       .where({ user_id: userId });
   },
+  createThought(db, thought) {
+    return db('thoughts')
+      .insert(thought)
+      .returning('*')
+      .then((rows) => rows[0]);
+  },
 };

@@ -14,14 +14,23 @@ thoughtsRouter
       });
   })
   .post('/', bodyParser, (req, res) => {
-    // eslint-disable-next-line no-unused-vars
-    const { id, userId, content } = req.body;
-    req.app.get('websocket')
-      .clients
-      .forEach((client) => {
-        client.send(content);
+    const { userId, content } = req.body;
+    const db = req.app.get('db');
+
+    const thoughtObject = {
+      user_id: userId,
+      content,
+    };
+
+    return thoughtsService.createThought(db, thoughtObject)
+      .then((thought) => {
+        req.app.get('websocket')
+          .clients
+          .forEach((client) => {
+            client.send(JSON.stringify(thought));
+          });
+        return res.status(201).json(thought);
       });
-    res.status(201).json(content);
   });
 
 module.exports = thoughtsRouter;

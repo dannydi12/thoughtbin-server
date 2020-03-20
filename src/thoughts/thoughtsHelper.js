@@ -20,6 +20,16 @@ async function checkThoughtExists(req, res, next) {
   }
 }
 
+function checkContent(req, res, next) {
+  const { content } = req.body;
+
+  if (!content) {
+    return res.status(400).send('Thought must contain content');
+  }
+  return next();
+}
+
 module.exports = {
   checkThoughtExists,
+  checkContent,
 };

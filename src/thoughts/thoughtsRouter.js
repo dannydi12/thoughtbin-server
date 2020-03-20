@@ -1,6 +1,6 @@
 const express = require('express');
 const thoughtsService = require('./thoughtsService');
-const { checkThoughtExists } = require('./thoughtsHelper');
+const { checkThoughtExists, checkContent } = require('./thoughtsHelper');
 
 const thoughtsRouter = express.Router();
 const bodyParser = express.json();
@@ -14,7 +14,7 @@ thoughtsRouter.route('/')
         res.json(thoughts);
       });
   })
-  .post(bodyParser, (req, res) => {
+  .post(bodyParser, checkContent, (req, res) => {
     const { userId, content } = req.body;
     const db = req.app.get('db');
 
@@ -38,7 +38,7 @@ thoughtsRouter.route('/')
 thoughtsRouter.route('/:id')
   .all(checkThoughtExists)
   .get((req, res) => res.json(res.thought))
-  .patch(bodyParser, (req, res) => {
+  .patch(bodyParser, checkContent, (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
     const db = req.app.get('db');

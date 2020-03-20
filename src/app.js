@@ -19,18 +19,17 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.use('/thoughts', thoughtsRouter)
+app.use('/thoughts', thoughtsRouter);
 
 app.use((error, req, res, next) => {
   let response;
   if (NODE_ENV === 'production') {
     response = {
       error: {
-        message: 'server error'
-      }
+        message: 'server error',
+      },
     };
-  }
-  else {
+  } else {
     console.log(error);
     response = { message: error.message, error };
   }

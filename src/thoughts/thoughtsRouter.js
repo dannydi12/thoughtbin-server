@@ -50,6 +50,13 @@ thoughtsRouter.route('/:id')
 
     return thoughtsService.updateThought(db, id, content)
       .then((updatedThought) => res.status(200).json(updatedThought));
+  })
+  .delete((req, res) => {
+    const { id } = req.params;
+    const db = req.app.get('db');
+
+    return thoughtsService.deleteThought(db, id)
+      .then(() => res.status(204).end());
   });
 
 module.exports = thoughtsRouter;

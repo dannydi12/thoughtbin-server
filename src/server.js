@@ -1,7 +1,15 @@
 const app = require('./app');
 const http = require('http');
-const ws = require('ws')
-const { PORT, WS_PORT } = require('../config');
+const ws = require('ws');
+const knex = require('knex');
+const { PORT, WS_PORT, DATABASE_URL } = require('../config');
+
+const db = knex({
+  client: 'pg',
+  connection: DATABASE_URL
+})
+
+app.set('db', db);
 
 const socketServer = http.createServer(app);
 const websocket = new ws.Server({ server: socketServer });

@@ -14,4 +14,10 @@ module.exports = {
       .returning('*')
       .then((rows) => rows[0]);
   },
+  updateThought(db, id, content) {
+    return db('thoughts')
+      .where({ id })
+      .update({ content })
+      .returning('*');
+  },
 };

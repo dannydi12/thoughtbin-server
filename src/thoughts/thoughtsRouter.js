@@ -4,8 +4,8 @@ const thoughtsService = require('./thoughtsService');
 const thoughtsRouter = express.Router();
 const bodyParser = express.json();
 
-thoughtsRouter
-  .get('/', (req, res) => {
+thoughtsRouter.route('/')
+  .get((req, res) => {
     const db = req.app.get('db');
 
     return thoughtsService.getAllThoughts(db)
@@ -13,7 +13,7 @@ thoughtsRouter
         res.json(thoughts);
       });
   })
-  .post('/', bodyParser, (req, res) => {
+  .post(bodyParser, (req, res) => {
     const { userId, content } = req.body;
     const db = req.app.get('db');
 
@@ -31,6 +31,16 @@ thoughtsRouter
           });
         return res.status(201).json(thought);
       });
+  });
+
+thoughtsRouter.route('/:id')
+  .patch(bodyParser, (req, res) => {
+    const { id } = req.params;
+    const { content } = req.body;
+    const db = req.app.get('db');
+
+    return thoughtsService.updateThought(db, id, content)
+      .then((updatedThought) => res.status(200).json(updatedThought));
   });
 
 module.exports = thoughtsRouter;

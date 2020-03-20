@@ -29,7 +29,15 @@ function checkContent(req, res, next) {
   return next();
 }
 
+function checkUserId(req, res, next) {
+  if (req.body.userId !== res.thought.user_id) {
+    return res.status(401).send('You can\'t modify others\' thoughts...');
+  }
+  return next();
+}
+
 module.exports = {
   checkThoughtExists,
   checkContent,
+  checkUserId,
 };

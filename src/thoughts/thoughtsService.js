@@ -2,7 +2,8 @@ module.exports = {
   getAllThoughts(db) {
     return db
       .select('*')
-      .from('thoughts');
+      .from('thoughts')
+      .orderBy('created_at', 'desc');
   },
   getThoughtById(db, id) {
     return db
@@ -15,7 +16,8 @@ module.exports = {
     return db // userId will be derived from a function that reads auth header for identity
       .select('*')
       .from('thoughts')
-      .where({ user_id: userId });
+      .where({ user_id: userId })
+      .orderBy('created_at', 'desc');
   },
   createThought(db, thought) {
     return db('thoughts')

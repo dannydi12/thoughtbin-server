@@ -1,4 +1,5 @@
 const express = require('express');
+const xss = require('xss');
 const thoughtsService = require('./thoughtsService');
 const requireToken = require('../middleware/requireToken');
 const {
@@ -32,7 +33,7 @@ thoughtsRouter.route('/')
 
     const thoughtObject = {
       user_id: res.userId,
-      content,
+      content: xss(content),
     };
 
     return thoughtsService
@@ -56,7 +57,7 @@ thoughtsRouter.route('/:id')
     const db = req.app.get('db');
 
     return thoughtsService
-      .updateThought(db, id, content)
+      .updateThought(db, id, xss(content))
       .then((updatedThought) => res.status(200).json(updatedThought));
   })
   .delete(bodyParser, requireToken, checkUserId, (req, res) => {

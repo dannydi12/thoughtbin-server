@@ -22,7 +22,8 @@ thoughtsRouter.route('/')
         .then((thoughts) => res.json(thoughts));
     }
 
-    return thoughtsService.getAllThoughts(db, offset)
+    return thoughtsService
+      .getAllThoughts(db, offset)
       .then((thoughts) => res.json(thoughts));
   })
   .post(bodyParser, requireToken, checkContent, (req, res) => {

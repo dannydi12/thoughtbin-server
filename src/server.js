@@ -24,11 +24,9 @@ app.set('websocket', websocket);
 
 // servers eagerly listening
 socketServer.listen(WS_PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Socket is up at http://localhost:${WS_PORT}`);
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Server listening at http://localhost:${PORT}`);
 });

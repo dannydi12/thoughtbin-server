@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('../config');
 
 const thoughtsRouter = require('./thoughts/thoughtsRouter');
+const tokenRouter = require('./token/tokenRouter');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/thoughts', thoughtsRouter);
+app.use('/token', tokenRouter);
 
 app.use((error, req, res, next) => {
   let response;

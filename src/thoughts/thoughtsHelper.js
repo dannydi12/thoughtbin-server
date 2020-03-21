@@ -23,12 +23,20 @@ async function checkThoughtExists(req, res, next) {
 function checkContent(req, res, next) {
   const { content, userId } = req.body;
 
+  if (!userId) {
+    return res.status(400).send('Thought must contain a user id');
+  }
+
   if (!content) {
     return res.status(400).send('Thought must contain content');
   }
 
-  if (!userId) {
-    return res.status(400).send('Thought must contain a user id');
+  if (content.length > 500) {
+    return res.status(400).send('Thought must not be longer than 500 characters');
+  }
+
+  if (content.length <= 3) {
+    return res.status(400).send('Thought must be greater than 3 characters');
   }
 
   return next();

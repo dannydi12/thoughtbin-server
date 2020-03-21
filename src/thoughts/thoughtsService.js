@@ -27,7 +27,8 @@ module.exports = {
     return db('thoughts')
       .where({ id })
       .update({ content })
-      .returning('*');
+      .returning('*')
+      .then((rows) => rows[0]);
   },
   deleteThought(db, id) {
     return db('thoughts')

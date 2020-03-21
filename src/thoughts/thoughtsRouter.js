@@ -1,23 +1,28 @@
 const express = require('express');
 const thoughtsService = require('./thoughtsService');
 const requireToken = require('../middleware/requireToken');
-const { checkThoughtExists, checkContent, checkUserId } = require('./thoughtsHelper');
+const {
+  checkThoughtExists,
+  checkContent,
+  checkUserId,
+  checkOffset,
+} = require('./thoughtsHelper');
 
 const thoughtsRouter = express.Router();
 const bodyParser = express.json();
 
 thoughtsRouter.route('/')
-  .get((req, res) => {
-    const { userId } = req.query;
+  .get(checkOffset, (req, res) => {
+    const { userId, offset } = req.query;
     const db = req.app.get('db');
 
     if (userId) {
       return thoughtsService
-        .getUserThoughts(db, userId)
+        .getUserThoughts(db, userId, offset)
         .then((thoughts) => res.json(thoughts));
     }
 
-    return thoughtsService.getAllThoughts(db)
+    return thoughtsService.getAllThoughts(db, offset)
       .then((thoughts) => res.json(thoughts));
   })
   .post(bodyParser, requireToken, checkContent, (req, res) => {

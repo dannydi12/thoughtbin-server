@@ -1,9 +1,11 @@
 module.exports = {
-  getAllThoughts(db) {
+  getAllThoughts(db, offset = 0) {
     return db
       .select('*')
       .from('thoughts')
-      .orderBy('created_at', 'desc');
+      .orderBy('created_at', 'desc')
+      .limit(20)
+      .offset(offset); // front end should add based on count of new posts from socket
   },
   getThoughtById(db, id) {
     return db
@@ -12,12 +14,14 @@ module.exports = {
       .where({ id })
       .first();
   },
-  getUserThoughts(db, userId) {
-    return db // userId will be derived from a function that reads auth header for identity
+  getUserThoughts(db, userId, offset = 0) {
+    return db
       .select('*')
       .from('thoughts')
       .where({ user_id: userId })
-      .orderBy('created_at', 'desc');
+      .orderBy('created_at', 'desc')
+      .limit(20)
+      .offset(offset);
   },
   createThought(db, thought) {
     return db('thoughts')

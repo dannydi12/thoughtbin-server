@@ -42,6 +42,16 @@ function checkContent(req, res, next) {
   return next();
 }
 
+function checkOffset(req, res, next) {
+  const { offset } = req.query;
+
+  if (offset && !Number(offset)) {
+    return res.status(400).send('Offset must be an non-negative integer');
+  }
+
+  return next();
+}
+
 function checkUserId(req, res, next) {
   const { id } = req.params;
 
@@ -59,4 +69,5 @@ module.exports = {
   checkThoughtExists,
   checkContent,
   checkUserId,
+  checkOffset,
 };

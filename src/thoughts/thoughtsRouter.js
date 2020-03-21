@@ -8,12 +8,17 @@ const bodyParser = express.json();
 
 thoughtsRouter.route('/')
   .get((req, res) => {
+    const { userId } = req.query;
     const db = req.app.get('db');
 
+    if (userId) {
+      return thoughtsService
+        .getUserThoughts(db, userId)
+        .then((thoughts) => res.json(thoughts));
+    }
+
     return thoughtsService.getAllThoughts(db)
-      .then((thoughts) => {
-        res.json(thoughts);
-      });
+      .then((thoughts) => res.json(thoughts));
   })
   .post(bodyParser, requireToken, checkContent, (req, res) => {
     const { content } = req.body;

@@ -40,7 +40,6 @@ function checkUserId(req, res, next) {
   thoughtsService
     .getThoughtById(req.app.get('db'), id)
     .then((thought) => {
-      console.log(thought.user_id, res.userId)
       if (thought.user_id !== res.userId) {
         return res.status(401).send('You can\'t modify others\' thoughts...');
       }

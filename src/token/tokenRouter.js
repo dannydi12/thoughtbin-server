@@ -5,7 +5,7 @@ const bodyParser = express.json();
 const tokenRouter = express.Router();
 
 tokenRouter.route('/')
-  .get((req, res) => {
+  .post((req, res) => {
     res.json({ token: tokenService.createJwt() });
   });
 

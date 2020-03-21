@@ -1,5 +1,6 @@
 const express = require('express');
 const thoughtsService = require('./thoughtsService');
+const requireToken = require('../middleware/requireToken');
 const { checkThoughtExists, checkContent, checkUserId } = require('./thoughtsHelper');
 
 const thoughtsRouter = express.Router();
@@ -14,12 +15,12 @@ thoughtsRouter.route('/')
         res.json(thoughts);
       });
   })
-  .post(bodyParser, checkContent, (req, res) => {
-    const { userId, content } = req.body;
+  .post(bodyParser, requireToken, checkContent, (req, res) => {
+    const { content } = req.body;
     const db = req.app.get('db');
 
     const thoughtObject = {
-      user_id: userId,
+      user_id: res.userId,
       content,
     };
 
@@ -38,7 +39,7 @@ thoughtsRouter.route('/')
 thoughtsRouter.route('/:id')
   .all(checkThoughtExists)
   .get((req, res) => res.json(res.thought))
-  .patch(bodyParser, checkUserId, checkContent, (req, res) => {
+  .patch(bodyParser, requireToken, checkUserId, checkContent, (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
     const db = req.app.get('db');
@@ -47,7 +48,7 @@ thoughtsRouter.route('/:id')
       .updateThought(db, id, content)
       .then((updatedThought) => res.status(200).json(updatedThought));
   })
-  .delete(bodyParser, checkUserId, (req, res) => {
+  .delete(bodyParser, requireToken, checkUserId, (req, res) => {
     const { id } = req.params;
     const db = req.app.get('db');
 

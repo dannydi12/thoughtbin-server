@@ -21,19 +21,31 @@ async function checkThoughtExists(req, res, next) {
 }
 
 function checkContent(req, res, next) {
-  const { content } = req.body;
+  const { content, userId } = req.body;
 
   if (!content) {
     return res.status(400).send('Thought must contain content');
   }
+
+  if (!userId) {
+    return res.status(400).send('Thought must contain a user id');
+  }
+
   return next();
 }
 
 function checkUserId(req, res, next) {
-  if (req.body.userId !== res.thought.user_id) {
-    return res.status(401).send('You can\'t modify others\' thoughts...');
-  }
-  return next();
+  const { id } = req.params;
+
+  thoughtsService
+    .getThoughtById(req.app.get('db'), id)
+    .then((thought) => {
+      console.log(thought.user_id, res.userId)
+      if (thought.user_id !== res.userId) {
+        return res.status(401).send('You can\'t modify others\' thoughts...');
+      }
+      return next();
+    });
 }
 
 module.exports = {

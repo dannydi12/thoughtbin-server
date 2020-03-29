@@ -2,7 +2,7 @@ const http = require('http');
 const { Server } = require('ws');
 const knex = require('knex');
 const app = require('./app');
-const { PORT, WS_PORT, DATABASE_URL } = require('../config');
+const { PORT, DATABASE_URL } = require('../config');
 
 // create knex instance
 const db = knex({
@@ -16,17 +16,9 @@ app.set('db', db);
 const server = http.createServer(app);
 const wss = new Server({ server });
 
-wss.on('connection', (socket) => {
-  console.log('hey');
-});
-
 app.set('websocket', wss);
 
 // server eagerly listening
 server.listen(PORT, () => {
   console.log(`HTTP server is up at http://localhost:${PORT}`);
 });
-
-// app.listen(PORT, () => {
-//   console.log(`Server listening at http://localhost:${PORT}`);
-// });

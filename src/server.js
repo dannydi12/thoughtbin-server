@@ -24,7 +24,7 @@ app.set('websocket', websocket);
 
 // servers eagerly listening
 socketServer.listen(WS_PORT, () => {
-  console.log(`Socket is up at http://localhost:${WS_PORT}`);
+  console.log(`Socket is up at ws://localhost:${WS_PORT}`);
 });
 
 app.listen(PORT, () => {

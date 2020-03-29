@@ -45,7 +45,8 @@ thoughtsRouter.route('/')
             client.send(JSON.stringify(thought));
           });
         return res.status(201).json(thought);
-      });
+      })
+      .catch((err) => console.log(err));
   });
 
 thoughtsRouter.route('/:id')

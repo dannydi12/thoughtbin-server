@@ -5,7 +5,7 @@
   "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "test": "mocha --require test/setup.js",
+    "test": "env NODE_ENV=test mocha --require test/setup.js",
     "dev": "nodemon ./src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",

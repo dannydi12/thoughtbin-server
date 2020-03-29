@@ -17,7 +17,7 @@ const socketServer = http.createServer(app);
 const websocket = new ws.Server({ server: socketServer });
 
 websocket.on('connection', (socket) => {
-  socket.send('hey');
+  // socket.send('hey');
 });
 
 app.set('websocket', websocket);

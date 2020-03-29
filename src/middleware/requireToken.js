@@ -13,10 +13,6 @@ function requireToken(req, res, next) {
         res.status(401).send('Invalid token');
       }
 
-      if (req.body.userId !== decoded.userId) {
-        return res.status(401).send('You can\'t modify others\' thoughts...');
-      }
-
       res.userId = decoded.userId;
 
       return next();

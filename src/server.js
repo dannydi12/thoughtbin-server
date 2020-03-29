@@ -13,20 +13,20 @@ const db = knex({
 app.set('db', db);
 
 // create web socket instance
-const socketServer = http.createServer(app);
-const wss = new Server({ server: app });
+const server = http.createServer(app);
+const wss = new Server({ server });
 
 wss.on('connection', (socket) => {
-  // socket.send('hey');
+  console.log('hey');
 });
 
 app.set('websocket', wss);
 
-// servers eagerly listening
-// wss.listen(WS_PORT, () => {
-//   console.log(`Socket is up at ws://localhost:${WS_PORT}`);
-// });
-
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
+// server eagerly listening
+server.listen(PORT, () => {
+  console.log(`HTTP server is up at http://localhost:${PORT}`);
 });
+
+// app.listen(PORT, () => {
+//   console.log(`Server listening at http://localhost:${PORT}`);
+// });

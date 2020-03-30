@@ -55,6 +55,28 @@ describe('thoughts endpoint', () => {
     });
   });
 
+  describe('GET /thoughts/:thoughtId', () => {
+    context('Given no thoughts', () => {
+      it('responds with a 404 if thought doesn\'t exist', () => {
+        return supertest(app)
+          .get('/thoughts/333')
+          .expect(404);
+      });
+    });
+
+    context('Given thoughts', () => {
+      beforeEach('add thoughts', () => {
+        return helper.seedThoughts(db, helper.makeThoughts());
+      });
+
+      it('responds with the requested thought', () => {
+        return supertest(app)
+          .get('/thoughts/3')
+          .expect(200, helper.makeThoughts().find((thought) => thought.id === 3));
+      });
+    });
+  });
+
   describe('POST /thoughts', () => {
     let wss;
     beforeEach('setup websocket', () => {
@@ -101,28 +123,6 @@ describe('thoughts endpoint', () => {
     });
   });
 
-  describe('GET /thoughts/:thoughtId', () => {
-    context('Given no thoughts', () => {
-      it('responds with a 404 if thought doesn\'t exist', () => {
-        return supertest(app)
-          .get('/thoughts/333')
-          .expect(404);
-      });
-    });
-
-    context('Given thoughts', () => {
-      beforeEach('add thoughts', () => {
-        return helper.seedThoughts(db, helper.makeThoughts());
-      });
-
-      it('responds with the requested thought', () => {
-        return supertest(app)
-          .get('/thoughts/3')
-          .expect(200, helper.makeThoughts().find((thought) => thought.id === 3));
-      });
-    });
-  });
-
   describe('PATCH /thoughts/:thoughtId', () => {
     context('Given no thoughts', () => {
       it('responds with a 404 if thought doesn\'t exist', () => {
@@ -155,6 +155,29 @@ describe('thoughts endpoint', () => {
               .get(`/thoughts/${res.body.id}`)
               .expect(200, res.body);
           });
+      });
+    });
+  });
+
+  describe('DELETE /thoughts/:thoughtId', () => {
+    context('Given no thoughts', () => {
+      it('responds with a 404 if thought doesn\'t exist', () => {
+        return supertest(app)
+          .delete('/thoughts/333')
+          .expect(404);
+      });
+    });
+
+    context('Given thoughts', () => {
+      beforeEach('add thoughts', () => {
+        return helper.seedThoughts(db, helper.makeThoughts());
+      });
+
+      it('deletes the thought and responds with 204', () => {
+        return supertest(app)
+          .delete('/thoughts/1')
+          .set('Authorization', `Bearer ${helper.makeToken(helper.USER)}`)
+          .expect(204);
       });
     });
   });

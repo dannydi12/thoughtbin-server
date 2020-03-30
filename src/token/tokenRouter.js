@@ -5,7 +5,7 @@ const tokenRouter = express.Router();
 
 tokenRouter.route('/')
   .post((req, res) => {
-    res.json({ token: tokenService.createJwt() });
+    res.status(201).json({ token: tokenService.createJwt() });
   });
 
 module.exports = tokenRouter;

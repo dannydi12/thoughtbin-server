@@ -42,7 +42,9 @@ thoughtsRouter.route('/')
         req.app.get('websocket')
           .clients
           .forEach((client) => {
-            client.send(JSON.stringify(thought));
+            if (client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(thought));
+            }
           });
         return res.status(201).json(thought);
       })

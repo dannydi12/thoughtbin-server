@@ -40,7 +40,7 @@ Launches Mocha.
 
 #### `npm start`
 
-Launches the server at the post specified in your `.env` file.
+Launches the server at the port specified in your `.env` file.
 
 ## Configuration
 

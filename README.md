@@ -1,26 +1,81 @@
-# Express Boilerplate!
 
-This is a boilerplate project used for starting new projects!
+# ThoughtBin Server
 
-## Set up
+ThoughtBin allows users to anonymously share and create content on a simple and frictionless micro-platform. Think of it as a privacy-centric Twitter with a hint of 4Chan. A live demo can be found at [https://thoughtbin.imdan.io/](https://thoughtbin.imdan.io/)
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Motivation
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+I wanted a social media network where I didn't have to worry about followers, likes, or reputation. I felt there was a need to create something that respected the user and fostered a safe space for self-expression. Soon after, the idea of ThoughtBin was born. 
 
-## Scripts
+ThoughtBin's basic principles:
 
-Start the application `npm start`
+* Disseminating information shouldn’t be difficult
+* Publishing new information should not require you to surrender your identity
+* Access to information should not be gated by identification
+* Every internet user should have the ability to *anonymously* share/create content; *pseudonymity* is not acceptable.
 
-Start nodemon for the application `npm run dev`
+By design, ThoughtBin only stores a single token in Local Storage to authenticate and fetch your personal thoughts. No trackers, no cookies, nothing else.
 
-Run the tests `npm test`
+## ThoughtBot
 
-## Deploying
+The live demo includes an automated posting bot that scrapes r/ShowerThoughts to feign user interaction and show off the WebSocket functionality + infinite scroll features. Here is the repository for [ThoughtBot](https://github.com/dannydi12/thoughtbin-bot).
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+## Installation
+
+#### `npm install`
+
+Installs all the required dependencies. Run this before anything else.
+
+#### `npm run migrate`
+
+Uses postgrator to create required tables. Create a database and edit `postgrator-config.js`  before running this command.
+
+#### `npm run dev`
+
+Runs the app in the development mode.
+
+#### `npm test`
+
+Launches Mocha.
+
+#### `npm start`
+
+Launches the server at the post specified in your `.env` file.
+
+## Configuration
+
+Make sure to go to `[thoughtbin-folder-name]/example.env` , rename it to `.env`, and then enter your configuration details (port, Postgres database URL, etc)
+
+### **The front-end repository can be found [here](https://github.com/dannydi12/thoughtbin-client).**
+
+## Built With
+
+#### Back-end:
+
+* Node
+* PostgreSQL
+* Knex
+* JSON Web Token
+* WebSockets
+* Express
+* Mocha, and Chai
+* Deployed with Heroku
+
+#### Front-end:
+
+* React
+* HTML5
+* CSS3
+* Javascript
+* JSON Web Token
+* WebSockets
+* Jest
+* Deployed with Zeit
+
+## Demo
+
+- [Live Demo](https://thoughtbin.imdan.io/)
+
+## Authors
+
+* **Daniel DiVenere** - Fullstack Development, Deployment, etc - [https://imdan.io/](https://imdan.io/)

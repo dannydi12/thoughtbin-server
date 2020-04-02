@@ -5,7 +5,7 @@ module.exports = {
       .from('thoughts')
       .orderBy('created_at', 'desc')
       .limit(20)
-      .offset(offset); // front end should add based on count of new posts from socket
+      .offset(offset);
   },
   getThoughtById(db, id) {
     return db

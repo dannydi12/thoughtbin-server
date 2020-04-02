@@ -36,15 +36,14 @@ thoughtsRouter.route('/')
       content: xss(content),
     };
 
+    // Add new thought to database and then send it to all socket connections
     return thoughtsService
       .createThought(db, thoughtObject)
       .then((thought) => {
         req.app.get('websocket')
           .clients
           .forEach((client) => {
-            // if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(thought));
-            // }
           });
         return res.status(201).json(thought);
       })

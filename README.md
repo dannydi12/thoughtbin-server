@@ -56,14 +56,14 @@ Make sure to go to `[thoughtbin-folder-name]/example.env` , rename it to `.env`,
 
 Open endpoints require no authentication.
 
-* [Get Token](docs/token.md) : `POST /token`
-* [Get Thoughts](docs/thoughts/get.md) : `GET /thoughts/`
+* [Get Token](docs/token.md) : `POST /token` - Get a token for subsequent authorized requests
+* [Get Thoughts](docs/thoughts/get.md) : `GET /thoughts/` - Get 10 thoughts at any given index
 
 ### Endpoints that require Authentication
 
 Basic CRUD operations in regard to thoughts.
 
-* [Create A Thought](docs/thoughts/post.md) : `POST /thoughts/`
+* [Create A Thought](docs/thoughts/post.md) : `POST /thoughts/` 
 * [Get A Thought](docs/thoughts/id/get.md) : `GET /thoughts/:id`
 * [Update A Thought](docs/thoughts/id/patch.md) : `PATCH /thoughts/:id`
 * [Delete A Thought](docs/thoughts/id/delete.md) : `DELETE /thoughts/:id`

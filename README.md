@@ -48,7 +48,26 @@ Launches the server at the port specified in your `.env` file.
 
 Make sure to go to `[thoughtbin-folder-name]/example.env` , rename it to `.env`, and then enter your configuration details (port, Postgres database URL, etc)
 
-### **The front-end repository can be found [here](https://github.com/dannydi12/thoughtbin-client).**
+**The front-end repository can be found [here](https://github.com/dannydi12/thoughtbin-client).**
+
+## Usage
+
+### Open Endpoints
+
+Open endpoints require no authentication.
+
+* [Get Token](docs/token.md) : `POST /token`
+* [Get Thoughts](docs/thoughts/get.md) : `GET /thoughts/`
+
+### Endpoints that require Authentication
+
+Basic CRUD operations in regard to thoughts.
+
+* [Create A Thought](docs/thoughts/post.md) : `POST /thoughts/`
+* [Get A Thought](docs/thoughts/id/get.md) : `GET /thoughts/:id`
+* [Update A Thought](docs/thoughts/id/patch.md) : `PATCH /thoughts/:id`
+* [Delete A Thought](docs/thoughts/id/delete.md) : `DELETE /thoughts/:id`
+
 
 ## Built With
 

@@ -1,13 +1,17 @@
 const http = require('http');
 const { Server } = require('ws');
+const { parse } = require('pg-connection-string');
 const knex = require('knex');
 const app = require('./app');
 const { PORT, DATABASE_URL } = require('../config');
 
+const pgconfig = parse(DATABASE_URL);
+pgconfig.ssl = { rejectUnauthorized: false };
+
 // create knex instance
 const db = knex({
   client: 'pg',
-  connection: DATABASE_URL,
+  connection: pgconfig,
 });
 
 app.set('db', db);

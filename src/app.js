@@ -16,7 +16,9 @@ app.use(morgan(morganOption, {
   skip: () => NODE_ENV === 'test',
 }));
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: '*',
+}));
 
 app.get('/', (req, res) => {
   res.status(200).end();

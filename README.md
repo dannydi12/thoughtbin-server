@@ -1,4 +1,3 @@
-
 # ThoughtBin Server
 
 [![CodeFactor](https://www.codefactor.io/repository/github/dannydi12/thoughtbin-server/badge)](https://www.codefactor.io/repository/github/dannydi12/thoughtbin-server)

@@ -2,7 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/dannydi12/thoughtbin-server/badge)](https://www.codefactor.io/repository/github/dannydi12/thoughtbin-server)
 
-ThoughtBin allows users to anonymously share and create content on a simple and frictionless micro-platform. Think of it as a privacy-centric Twitter with a hint of 4Chan. A live demo can be found at [https://thoughtbin.imdan.io/](https://thoughtbin.imdan.io/)
+ThoughtBin allows users to anonymously share and create content on a simple and frictionless micro-platform. Think of it as a privacy-centric Twitter with a hint of 4Chan. A live demo can be found at [https://thoughtbin.danthebuilder.com/](https://thoughtbin.danthebuilder.com/)
 
 ## Summary
 This API provides the means to create, read, update, and delete thoughts as a user on Thoughtbin.
@@ -97,8 +97,8 @@ Basic CRUD operations in regard to thoughts.
 
 ## Demo
 
-- [Live Demo](https://thoughtbin.imdan.io/)
+- [Live Demo](https://thoughtbin.danthebuilder.como/)
 
 ## Authors
 
-* **Daniel DiVenere** - Fullstack Development, Deployment, etc - [https://imdan.io/](https://imdan.io/)
+* **Daniel DiVenere** - Fullstack Development, Deployment, etc - [https://danthebuilder.com/](https://danthebuilder.com/)
